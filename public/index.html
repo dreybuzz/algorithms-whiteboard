@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./assets/img/logo.svg" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Personal Whiteboard For Data Structures & Algorithm Practice"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="apple-touch-icon" href="./assets/img/logo.png" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Algorithm Whiteboard</title>
+  </head>
+  <body class="dark">
+    <div class="d-flex flex-column" id="root">
+      <!-- Header Start -->
+      <header class="px-2">
+        <div class="d-flex justify-content-between align-items-center">
+          <!-- Logo -->
+          <div class="logo-container">
+            <img src="./assets/img/logo.png" alt="Logo" class="logo" />
+          </div>
+
+          <!-- Project Title -->
+          <div class="p-1 d-flex justify-content-center align-items-center">
+            <span class="fw-bolder fs-6">Algorithm Whiteboard</span>
+          </div>
+
+          <!-- Theme Switcher -->
+          <div class="theme-switcher" id="theme-toggler" role="button">
+            <i class="bi bi-lightbulb-fill fs-3"></i>
+          </div>
+        </div>
+      </header>
+      <!-- Header End -->
+
+      <!-- Main Start -->
+      <main
+        class="flex-grow-1 bordered overflow-auto mt-1 p-2 d-flex flex-column"
+      >
+        <!-- Global Toolbox -->
+        <div
+          id="global-toolboox"
+          class="border d-flex justify-content-center mx-5"
+          style="gap: 2em"
+        >
+          <!-- Board -->
+          <div
+            class="p-2 d-flex flex-column justify-content-center align-items-center zoom-in global-tool"
+            role="button"
+            id="add-new-board"
+          >
+            <i class="bi bi-archive-fill fs-3"></i>
+            <span class="">Board</span>
+          </div>
+
+          <!-- Array -->
+          <div
+            class="p-2 d-flex flex-column justify-content-center align-items-center zoom-in global-tool"
+            role="button"
+            id="add-new-array"
+          >
+            <i class="bi bi-view-stacked fs-3"></i>
+            <span class="">Array</span>
+          </div>
+
+          <!-- Pointer -->
+          <div
+            class="p-2 d-flex flex-column justify-content-center align-items-center zoom-in global-tool"
+            role="button"
+          >
+            <i class="bi bi-arrows-move fs-3"></i>
+            <span class="">Pointer</span>
+          </div>
+
+          <!-- Object -->
+          <div
+            class="p-2 d-flex flex-column justify-content-center align-items-center zoom-in global-tool"
+            role="button"
+          >
+            <i class="bi bi-basket2 fs-3"></i>
+            <span class="">Object</span>
+          </div>
+        </div>
+
+        <div
+          id="workspace"
+          class="bordered p-3 flex-grow-1 overflow-auto"
+        ></div>
+      </main>
+      <!-- Main End -->
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/js/helpers.js"></script>
+  <script src="./assets/js/BoardArray.js"></script>
+  <script src="./assets/js/Board.js"></script>
+  <script src="./assets/js/main.js"></script>
+</html>
