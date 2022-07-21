@@ -1,7 +1,5 @@
-const allBoards = {}
-
 class Board {
-    constructor(title = "Board " + generateRandomNumber(), color = "black") {
+    constructor(title = "Board " + generateRandomNumber(), color = "#" + generateRandomColor()) {
         this.id = "board-" + generateRandomNumber()
         this.title = title
         this.color = color

@@ -43,15 +43,43 @@ header {
   border-bottom: 2px solid;
 }
 
+.bordered-horizontal {
+  border: none;
+  border-right: 2px solid;
+  border-left: 2px solid;
+}
+
+.bordered-vertical {
+  border: none;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+}
+
 .draggable {
-  cursor: move;
   position: absolute;
-  z-index: 5;
+}
+
+.draggable-header {
+  cursor: move;
 }
 
 .resizable {
   overflow: scroll;
   resize: both;
+}
+
+.resizer-bottom {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: n-resize;
+}
+
+.element-icon {
+  font-size: xx-large;
 }
 
 .zoom-in {
@@ -68,15 +96,19 @@ header {
 }
 
 .array {
-  min-width: 20%;
-  min-height: 7.5%;
+  min-width: 8%;
+  min-height: 10%;
 }
 
 .board {
-  min-width: 10%;
+  min-width: 35%;
+  min-height: 35%;
+}
+
+.pointer {
+  min-width: 5%;
   min-height: 5%;
-  height: 25%;
-  width: 25%;
+  z-index: 1;
 }
 
 /* Dark Mode Styles */

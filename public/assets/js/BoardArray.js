@@ -1,6 +1,3 @@
-const allBoardArrays = {}
-
-
 class BoardArray {
     constructor(arr, title = "Board Array " + generateRandomNumber(), length = null) {
         if (length && length < arr.length) {
@@ -8,7 +5,16 @@ class BoardArray {
         }
         this.id = "board-array-" + generateRandomNumber()
         this.array = [...arr]
+        this.title = title
         this.length = length || this.array.length
-        allBoardArrays[title] = this
+    }
+
+    pop() {
+        this.array.pop()
+        return true
+    }
+
+    push(val = generateRandomNumber()) {
+        this.array.push(val)
     }
 }
