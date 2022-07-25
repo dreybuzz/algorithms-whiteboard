@@ -1,5 +1,9 @@
+// Global Variables
 const workspace = document.getElementById("workspace")
 
+
+/* ######## Theme Start ########
+*/
 function isDarkTheme() {
     return document.body.classList.contains("dark")
 }
@@ -8,40 +12,21 @@ const themeToggler = document.getElementById("theme-toggler")
 themeToggler.addEventListener("click", () => {
     isDarkTheme() ? document.body.classList.remove("dark") : document.body.classList.add("dark")
 })
+/* ######## Theme End ########
+*/
 
 
-// Add New Board To Global Board
+
+/* ######## Board Start ########
+*/
 const addNewBoardBtn = document.getElementById("add-new-board")
 addNewBoardBtn.addEventListener("click", () => {
     const boardTitle = "Board " + (Object.values(allBoards).length + 1)
-    const newBoard = new Board(boardTitle, generateRandomColor())
+    const newBoard = new Board(boardTitle, "#" + generateRandomColor())
     allBoards[boardTitle] = newBoard
     showBoard(newBoard)
 })
 
-
-// Add New Array To Global Board
-const addNewArrayBtn = document.getElementById("add-new-array")
-addNewArrayBtn.addEventListener("click", () => {
-    const arrayTitle = "Array " + (Object.values(allBoardArrays).length + 1)
-    const newBoardArray = new BoardArray([generateRandomNumber(1, 5), generateRandomNumber(2, 10), generateRandomNumber(21, 220)], arrayTitle)
-    allBoardArrays[arrayTitle] = newBoardArray
-    showNewArray(newBoardArray)
-})
-
-
-// Add New Pointer To Global Board
-const addNewPointerBtn = document.getElementById("add-new-pointer")
-addNewPointerBtn.addEventListener("click", () => {
-    const pointerTitle = "Pointer " + Object.values(allPointers).length + 1
-    const newPointer = new Pointer(pointerTitle)
-    allPointers[pointerTitle] = newPointer
-    showPointer(newPointer)
-    console.log(newPointer)
-})
-
-
-// Create Board Element
 function createBoard(id, title, color) {
     // Main Board
     const boardElement = document.createElement("div")
@@ -62,15 +47,114 @@ function createBoard(id, title, color) {
     return boardElement
 }
 
-// Show Board
 function showBoard({ id: boardID, title, color }, board = "global") {
     const boardElement = createBoard(boardID, title, color)
     workspace.appendChild(boardElement)
     dragElement(boardElement, boardElement.id + "-header")
 }
+/*######## Board End ########
+*/
 
 
-// Create Array Element
+
+
+
+/*######## Strings Start ########
+*/
+const addNewStringsBtn = document.getElementById("add-new-strings")
+addNewStringsBtn.addEventListener("click", () => {
+    const stringsTitle = "Strings " + (Object.values(allStrings).length + 1)
+    const newStrings = new Strings(stringsTitle, "#" + generateRandomColor(), "lollipop")
+    allStrings[stringsTitle] = newStrings
+    showNewStrings(newStrings)
+})
+
+function createStrings(instance) {
+    // Strings Element Container
+    const stringsElement = document.createElement("div")
+    stringsElement.id = instance.id
+    stringsElement.classList.add("strings", "bordered", "draggable", "resizable")
+
+    // Strings Header
+    const stringsHeader = createStringsHeader(instance)
+    stringsElement.appendChild(stringsHeader)
+
+    // Strings Elemeents Body
+    const stringsElements = createStringsElements(instance)
+    stringsElement.appendChild(stringsElements)
+
+    return stringsElement
+
+}
+
+function createStringsHeader(instance) {
+    const stringsHeader = document.createElement("div")
+    stringsHeader.id = instance.id + "-header"
+    stringsHeader.innerHTML = `
+    <span>Lorem</span>
+    <span>${instance.title}</span>
+    <span>X</span>
+    `
+    stringsHeader.classList.add("d-flex", "justify-content-between", "align-items-center", "draggable-header", "p-2")
+    stringsHeader.style.background = instance.color
+
+    return stringsHeader
+}
+
+function createStringsToolBox(instance) {
+    const stringsToolbox = document.createElement("div")
+    stringsToolbox.id = instance.id + "-toolbox"
+    stringsToolbox.classList.add("p-3", "bordered-horizontal")
+    stringsToolbox.textContent = "Toolbox"
+
+    return stringsToolbox
+}
+
+function createStringsElements(instance) {
+    const stringsElements = document.createElement("div")
+    stringsElements.classList.add("d-flex", "justify-contents-evenly", "align-items-center", "p-2")
+    stringsElements.innerHTML = `<span class="strings-elements w-100 d-flex justify-content-evenly">${instance.strings}</span>`
+
+    return stringsElements
+}
+
+function showNewStrings(instance) {
+    const stringsElement = createStrings(instance)
+    workspace.appendChild(stringsElement)
+    dragElement(stringsElement, stringsElement.id + "-header")
+
+}
+
+function updateStrings(instance) {
+    const stringsHeader = createArrayHeader(instance)
+    const stringsToolbox = createArrayToolBox(instance)
+    const stringsElements = createArrayElements(instance)
+    const stringsElement = document.getElementById(instance.id)
+    stringsElement.innerHTML = ``
+    stringsElement.appendChild(stringsHeader)
+    stringsElement.appendChild(stringsToolbox)
+    stringsElement.appendChild(stringsElements)
+    dragElement(stringsElements, stringsElement.id + "-header")
+    return true
+
+}
+/*######## Strings End ########
+*/
+
+
+
+
+
+/*######## Array Start ########
+*/
+const addNewArrayBtn = document.getElementById("add-new-array")
+addNewArrayBtn.addEventListener("click", () => {
+    const arrayTitle = "Array " + (Object.values(allBoardArrays).length + 1)
+    const newBoardArray = new BoardArray([generateRandomNumber(1, 5), generateRandomNumber(2, 10), generateRandomNumber(21, 220)], arrayTitle)
+    allBoardArrays[arrayTitle] = newBoardArray
+    showNewArray(newBoardArray)
+})
+
 function createArray(newBoardArray) {
     const { id, title, array } = newBoardArray
 
@@ -95,7 +179,6 @@ function createArray(newBoardArray) {
     arrayElement.appendChild(arrayElements)
     return arrayElement
 }
-
 
 function createArrayHeader(boardArray) {
     const { id, title } = boardArray
@@ -152,15 +235,11 @@ function createArrayElements(array) {
     return arrayElements
 }
 
-
-// Show Array
 function showNewArray(newBoardArray, board = "global") {
     const arrayElement = createArray(newBoardArray)
     workspace.appendChild(arrayElement)
     dragElement(arrayElement, arrayElement.id + "-header")
 }
-
-
 
 function updateBoardArray(boardArray) {
     const boardArrayHeader = createArrayHeader(boardArray)
@@ -174,10 +253,23 @@ function updateBoardArray(boardArray) {
     dragElement(arrayElement, arrayElement.id + "-header")
     return true
 }
+/*######## Array End ########
+*/
 
 
 
-// Create Pointer
+
+
+/*######## Pointer Start ########
+*/
+const addNewPointerBtn = document.getElementById("add-new-pointer")
+addNewPointerBtn.addEventListener("click", () => {
+    const pointerTitle = "Pointer " + (Object.values(allPointers).length + 1)
+    const newPointer = new Pointer(pointerTitle, "#" + generateRandomColor())
+    allBoards[pointerTitle] = newPointer
+    showPointer(newPointer)
+})
+
 function createPointer(id, title, color) {
     const pointerElement = document.createElement("div")
     pointerElement.id = id
@@ -189,34 +281,20 @@ function createPointer(id, title, color) {
 
 }
 
-
-// Show Pointer
 function showPointer({ id: pointerID, title, color }, board = "global") {
     const pointerElement = createPointer(pointerID, title, color)
     workspace.appendChild(pointerElement)
     dragElement(pointerElement, pointerElement.id + "-header")
 }
+/*######## Pointer End ########
+*/
 
 
 
-// function detectResize(nodeElement, width, height) {
-//     let currentWidth = nodeElement.offsetWidth
-//     let currentHeight = nodeElement.offsetHeight
-//     // document.getElementById(nodeElement.id + "-icon").style.fontSize = currentWidth / 2 + "%"
-// }
-
-// setInterval(() => {
-//     const element = document.querySelector(".pointer")
-//     if (element) {
-//         detectResize(element)
-//     }
-
-// }, 10)
 
 
-
-// Make Element Draggable
-// Sauce: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_draggable
+/*######## Miscs Start ########
+*/
 function dragElement(element, header = element.id + "-header") {
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     if (document.getElementById(header)) {
@@ -257,62 +335,6 @@ function dragElement(element, header = element.id + "-header") {
         document.onmousemove = null;
     }
 }
+/*######## Miscs End ########
+*/
 
-
-
-function makeDraggable(nodeElement) {
-
-    nodeElement.draggable = "true"
-    nodeElement.style.position = "absolute"
-
-    let initialCursorPositionX, initialCursorPositionY
-
-    function onMouseDown(e) {
-        e.preventDefault()
-        initialCursorPositionX = e.clientX
-        initialCursorPositionY = e.clientY
-        document.onmousemove = onMouseMove
-        document.onmouseup = onMouseUp
-    }
-
-    function onMouseMove(e) {
-        e.preventDefault()
-        // let currentPositionX = e.pageX
-        // let currentPositionY = e.pageY
-
-        let currentPositionX = initialCursorPositionX - e.clientX
-        let currentPositionY = initialCursorPositionY - e.clientY
-        currentPositionX = e.clientX
-        currentPositionY = e.clientY
-        nodeElement.style.left = currentPositionX + "px"
-        nodeElement.style.top = currentPositionY + "px"
-
-    }
-
-    function onMouseUp(e) {
-        document.onmouseup = null
-        document.onmousemove = null
-        // nodeElement = null
-    }
-
-
-
-
-    nodeElement.addEventListener("dragstart", (e) => {
-        e.preventDefault()
-        // onMouseDown(e)
-        // console.log("Drag Start")
-        let currentPositionX = e.pageX
-        let currentPositionY = e.pageY
-        nodeElement.style.left = currentPositionX + "px"
-        nodeElement.style.top = currentPositionY + "px"
-    })
-
-    nodeElement.addEventListener("drop", (e) => {
-        e.preventDefault()
-        // onMouseDown(e)
-        console.log("Drag End")
-    })
-
-
-}

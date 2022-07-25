@@ -20,6 +20,12 @@ body,
   transition: 0.5s;
 }
 
+::-webkit-scrollbar {
+  width: 0.2rem;
+  height: 0.2rem;
+  background-color: #1e1e2d;
+}
+
 header {
   max-height: 7em;
   overflow-y: hidden;
@@ -95,6 +101,12 @@ header {
   border-bottom: none;
 }
 
+.strings {
+  min-width: 5%;
+  min-height: 7%;
+  font-weight: bolder;
+}
+
 .array {
   min-width: 8%;
   min-height: 10%;
@@ -109,6 +121,12 @@ header {
   min-width: 5%;
   min-height: 5%;
   z-index: 1;
+}
+
+.strings-elements {
+  word-spacing: 15px;
+  letter-spacing: 20px;
+  font-size: larger;
 }
 
 /* Dark Mode Styles */
